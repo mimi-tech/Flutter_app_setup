@@ -1,0 +1,168 @@
+linter:
+  rules:
+    public_member_api_docs: false
+    prefer_single_quotes: false
+    prefer_double_quotes: true
+    lines_longer_than_80_chars: false
+    format-comment: false
+    avoid-dynamic:
+    exclude:
+      - lib/app/app_bloc_observer.dart
+    prefer-match-file-name:
+      exclude:
+        - test/**
+        - lib/l10n/**
+        - "**/model/*.dart"
+    avoid-shadowing:
+      ignore-static: true
+      ignore-fields: true
+      ignore-parameters: true
+      ignored-names:
+        - context
+    avoid-nullable-interpolation:
+      ignored-invocations:
+        - log
+        - print
+        - debugPrint
+        - v
+        - t
+        - d
+        - i
+        - w
+        - e
+        - wtf
+        - f
+    avoid-ignoring-return-values:
+      exclude:
+        - lib/main_development.dart
+        - lib/main_production.dart
+        - lib/main_staging.dart
+        - test/**
+    no-magic-string:
+      allow-only-once: true
+      ignored-invocations:
+        - $
+        - log
+        - print
+        - debugPrint
+        - v
+        - t
+        - d
+        - i
+        - w
+        - e
+        - wtf
+        - f
+      exclude:
+        - test/**
+    prefer-static-class:
+      ignore-annotations:
+        - InjectableInit
+      ignore-private: true
+      ignore-names:
+        - bootstrap
+        - (.*)Provider
+        - use(.*)
+    parameters-ordering:
+      ignore-overridden: true
+      required: "first"
+      default: "last"
+    member-ordering:
+      exclude:
+        - lib/routes/app_router.dart
+        - "**/*_bloc.dart"
+      order:
+        - constructors
+        - public-fields
+        - private-fields
+        - public-getters
+        - private-getters
+        - public-setters
+        - private-setters
+        - public-methods
+        - private-methods
+    prefer-extracting-callbacks:
+      ignored-named-arguments:
+        - create
+        - listener
+      allowed-line-count: 10
+    avoid-inferrable-type-arguments:
+      ignored-invocations:
+        - context.read
+        - GetIt.I
+        - watch
+        - context.select
+        - context.watch
+    prefer-overriding-parent-equality:
+      exclude:
+        - lib/form_inputs/**
+    avoid-unnecessary-nullable-return-type:
+      exclude:
+        - lib/form_inputs/**
+    no-magic-number:
+      allowed: [0, 1, 4, 8, 12, 16, 24, 28]
+      allow-only-once: true
+    avoid-long-functions:
+      max-length: 80
+      ignored-names:
+        - builder
+        - build
+    prefer-correct-identifier-length:
+      exceptions: ["id"]
+      max-identifier-length: 30
+      min-identifier-length: 3
+    arguments-ordering:
+      last:
+        - child
+        - children
+    avoid-nested-conditional-expressions:
+      acceptable-level: 2
+    banned-usage:
+      severity: style
+      entries:
+        - ident: log
+          description: Prefer AppLogger instead of log for better logging capabilities.
+        - ident: print
+          description: Prefer AppLogger instead of print for better logging capabilities.
+        - ident: debugPrint
+          description: Prefer AppLogger instead of debugPrint for better logging capabilities.
+        - name-pattern: '^AppColors\.(?!extended)'
+          description: "Only extended colors are allowed with AppColors."
+          severity: error
+        - ident: BlocProvider.of
+          description: Prefer context.read, context.watch, or context.select instead
+          severity: style
+        - ident: TextEditingController
+          description: Please use formz inputs instead of TextEditingController
+          severity: error
+        - ident: useTextEditingController
+          description: Please use formz inputs instead of useTextEditingController
+          severity: error
+        - name-pattern: '^AppTextTheme\.textTheme\..+'
+          description: Prefer Theme.of(context).textTheme or context.textTheme instead of AppTextTheme.
+          severity: error
+        - name-pattern: '^Colors\..+'
+          description: Prefer using colorScheme from theme for extended app colors instead of direct Colors usage.
+          severity: error
+        - name-pattern: '^Color\..+'
+          description: Prefer using colorScheme from theme for extended app colors instead of direct Color usage.
+          severity: error
+        - type: Future
+          entries:
+            - ident: ignore
+              description: Ignoring a future can result in uncaught asynchronous errors, prefer wrapping the future in unawaited()
+              severity: error
+    prefer-correct-handler-name:
+      name-pattern: ^handle[A-Z]+
+      ignore-functions: true
+      ignore-public: true
+    function-always-returns-null:
+      ignored-invocations:
+        - useCallback
+        - useEffect
+    avoid-returning-cascades: false
+
+  formatter:
+    indent: 0
+    line-length: 80
+    cascading-widget-extensions: true
